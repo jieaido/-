@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
+using System.IO;
 using System.Web.UI;
-
 using Microsoft.Reporting.WebForms;
 using SharedLibrary;
 
-namespace WebApplication1
+namespace WebApplication2
 {
     public partial class _Default : Page
     {
@@ -43,6 +40,41 @@ namespace WebApplication1
             //localreport.SetParameters(new ReportParameter("rDate",new DateTime(2015,8,1).ToShortDateString()));
 
             localreport.Refresh();
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Microsoft.Reporting.WebForms.Warning[] Warnings;
+            string[] streamids;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            var localreport = this.ReportViewer1.LocalReport;
+            string deviceInfo = "<DeviceInfo>" + "<SimplePageHeaders>True</SimplePageHeaders>" + "</DeviceInfo>";
+
+            
+            if (localreport.DataSources.Count==0)
+            {
+                try
+                {
+                    byte[] bs = localreport.Render("Excel", deviceInfo, out mimeType, out encoding, out fileNameExtension,
+                out streamids, out Warnings);
+                    bs = localreport.Render("Excel");
+                    var di = Directory.CreateDirectory(@"d:\2005\");
+                    using (FileStream fs = new FileStream(di.FullName + DateTime.Now.ToString("D") + ".xls", FileMode.Create))
+                    {
+                        fs.Write(bs, 0, bs.Length);
+                        fs.Close();
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+                
+            }
+         
         }
     }
 }

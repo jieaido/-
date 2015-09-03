@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
 using System.Collections;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
-namespace SystemDAO
+namespace SharedLibrary
 {
     /// <summary>
     /// 数据库的通用访问代码 苏飞修改

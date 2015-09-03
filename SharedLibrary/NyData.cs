@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Windows.Forms;
-using SystemDAO;
 
-namespace WindowsFormsApplication1
+namespace SharedLibrary
 {
     public  static class NyData
     {
@@ -76,14 +71,12 @@ namespace WindowsFormsApplication1
             return resultlist.ToList();
         }
 
-        public static void CreateDate(ProgressBar pb, int num = 10000)
+        public static void CreateDate(int num=10000)
         {
-            pb.Value = 0;
-            pb.Maximum = num;
             for (int i = 0; i < num; i++)
             {
                 Random r = new Random();
-                int year = r.Next(2015, 2026);
+                int year = r.Next(2014, 2016);
                 int month = r.Next(1, 13);
                 int date = r.Next(1, 29);
                 int hour = r.Next(0, 24);
@@ -110,8 +103,6 @@ namespace WindowsFormsApplication1
                     SqlHelper.ExecteNonQueryText(cmd2, p1, p2, p3);
                 }
             }
-            pb.Value += 1;
-            MessageBox.Show("OK!");
            
         }
 

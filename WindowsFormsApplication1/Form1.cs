@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Reporting.WinForms;
+using SharedLibrary;
 
 namespace WindowsFormsApplication1
 {
@@ -89,7 +90,7 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e)
         {
             int num = Convert.ToInt32(textBox1.Text);
-            NyData.CreateDate(this.progressBar1,num);
+            NyData.CreateDate(num);
         }
 
         private void label1_Click(object sender, EventArgs e)
